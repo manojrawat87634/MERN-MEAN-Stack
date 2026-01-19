@@ -26,6 +26,10 @@ studentSchema.pre('save', async function () {
     }
 });
 
+studentSchema.methods.comparePassword = async function (password){
+   return bcrypt.compare(this.password, password);
+}
+
 
 
 const StudentModel = mongoose.model("Student", studentSchema);

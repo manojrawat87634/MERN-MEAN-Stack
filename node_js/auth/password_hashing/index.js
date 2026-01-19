@@ -24,6 +24,8 @@ app.post('/register', async (req, res)=>{
         return res.json({"error" : 'Internal Server Error'}).status(400);
     }
 })
+
+
 app.listen(3000, ()=>{
     connectionToDatabase();
     console.log('running');
