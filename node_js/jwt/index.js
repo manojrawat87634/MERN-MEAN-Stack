@@ -10,7 +10,9 @@ app.get('/', (req, res) =>{
 });
 
 app.get('/user/:id', (req, res)=>{
-    const data = decodeToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoibWFub2oiLCJlbWFpbCI6Im1hbm9qQGdtYWlsLmNvbSIsImlhdCI6MTc2OTE2NTQ2N30.u0AqzDNwOkOsbY8W-lkSMamsRYrpaPzQkSSYjxGEkfw');
+    const id = req.params.id;
+    console.log(id);
+    const data = decodeToken(id);
     return res.json(data);
 })
 
