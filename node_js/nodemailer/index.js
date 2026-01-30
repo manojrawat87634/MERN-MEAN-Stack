@@ -4,7 +4,7 @@ import sendMailService from "./src/services/sendMailServices.js";
 const app = express();
 
 app.get("/", async(req, res)=>{
-    await sendMailService('positive.mind.123456789@gmail.com');
+    await sendMailService();
     res.json({
 
     })
