@@ -36,9 +36,14 @@ function App() {
             className="group flex items-center justify-between rounded-xl bg-white/5 px-4 py-3 text-sm text-white/90 hover:bg-white/10 transition"
           >
             <span className="opacity-0 group-hover:opacity-100 text-xs text-white/40 transition">
-              •
+         
             </span>
             <span className="truncate">{e}</span>
+            <button onClick={()=>{
+                const newTodo = todos.filter((el)=> e != el);
+                 localStorage.setItem('todos', JSON.stringify(newTodo));
+                setTodos(newTodo);
+            }}>Delete</button>
 
           </div>
         ))}
@@ -55,6 +60,7 @@ function App() {
 
         <button
           onClick={() => {
+            
             const newTodos = [...todos, userInp];
             setTodos(newTodos);
             localStorage.setItem('todos', JSON.stringify(newTodos));
