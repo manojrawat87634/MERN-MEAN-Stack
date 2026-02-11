@@ -10,7 +10,7 @@ const loginUser = (req, res)=>{
     const isValid = user.comparePassword(req.body.password);
     if (isValid){
         const token = encodeUser({_id : user._id, email : user.email});
-        return res.json({accessToken});
+        return res.json({accessToken : token});
     }
     res.json({ "error" : "Invalid Info"}).status(400);
 }

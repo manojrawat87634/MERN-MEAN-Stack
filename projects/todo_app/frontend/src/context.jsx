@@ -5,9 +5,7 @@ export const DataContext = createContext();
 
 export const DataProviderFuncComp = ({ children }) => {
     const getData = ()=>{}
-    
     const postData = async (route, data, setSubmitting)=>{
-
         try {
             setSubmitting(true);
              const data = await fetch(`${API_BASE_URL}/${route}`, {
@@ -17,7 +15,6 @@ export const DataProviderFuncComp = ({ children }) => {
                 method : "POST",
                 body : JSON.stringify(data)
             });
-
             const res = await data.json();
             setSubmitting(false);
             return res
@@ -28,5 +25,5 @@ export const DataProviderFuncComp = ({ children }) => {
         } 
 
     }
-    return <DataContext.Provider value={{}}>{children}</DataContext.Provider>
+    return <DataContext.Provider value={{ postData }}>{children}</DataContext.Provider>
 }

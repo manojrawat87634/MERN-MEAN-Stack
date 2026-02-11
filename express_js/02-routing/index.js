@@ -1,5 +1,7 @@
 import express from "express";
 
+
+const app = express();
 app.use(express.json()); // to read JSON body
 
 // GET
@@ -10,6 +12,7 @@ app.get("/users", (req, res) => {
 // POST
 app.post("/users", (req, res) => {
   const user = req.body;
+  console.log(req.body);
   res.send(`User created: ${JSON.stringify(user)}`);
 });
 

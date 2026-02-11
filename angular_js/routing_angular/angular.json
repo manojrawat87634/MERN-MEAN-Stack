@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "work": {
+    "routing_angular": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -56,10 +56,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "work:build:production"
+              "buildTarget": "routing_angular:build:production"
             },
             "development": {
-              "buildTarget": "work:build:development"
+              "buildTarget": "routing_angular:build:development"
             }
           },
           "defaultConfiguration": "development"

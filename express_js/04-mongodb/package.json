@@ -1,8 +1,5 @@
 {
-  "dependencies": {
-    "express": "^5.2.1"
-  },
-  "name": "02-routing",
+  "name": "04-mongodb",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,5 +9,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "express": "^5.2.1",
+    "mongoose": "^9.2.0"
+  }
 }
