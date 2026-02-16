@@ -18,6 +18,6 @@ export const decodeUser = async (token) => {
 }
 
 export const encodeUser = async (object) => {
-    const token = await jwt.sign(object, "my_private_key");
+    const token =  jwt.sign(object, "my_private_key");
     return token;
 }
