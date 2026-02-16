@@ -1,0 +1,16 @@
+<form #myForm="ngForm" (ngSubmit)="submitForm(myForm)">
+     <input 
+    type="text"
+    name="username"
+    [(ngModel)]="user.name"
+    required
+  />
+  <input 
+    type="email"
+    name="email"
+    [(ngModel)]="user.email"
+    required
+  />
+  <button type="submit">Submit</button>
+
+</form>

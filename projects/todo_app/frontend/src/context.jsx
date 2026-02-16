@@ -8,17 +8,16 @@ export const DataProviderFuncComp = ({ children }) => {
     const postData = async (route, data, setSubmitting)=>{
         try {
             setSubmitting(true);
-             const data = await fetch(`${API_BASE_URL}/${route}`, {
+             const res1 = await fetch(`${API_BASE_URL}/${route}/`, {
                 headers : {
                     'content-type' : "application/json"
                 },
                 method : "POST",
                 body : JSON.stringify(data)
             });
-            const res = await data.json();
+            const res = await res1.json();
             setSubmitting(false);
-            return res
-
+            return res;
         } catch (error) {
             console.log(error);
             return ;   

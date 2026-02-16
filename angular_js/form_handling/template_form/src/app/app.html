@@ -1,0 +1,13 @@
+<a routerLink="/login">Login</a>
+
+@if (isLogin){
+  <button (click)="logout()">Logout</button>
+}
+@else {
+   <button (click)="login()">Login</button>
+}
+
+@for (student of users; track users){
+  <p>{{student}}</p>
+} 
+<router-outlet />

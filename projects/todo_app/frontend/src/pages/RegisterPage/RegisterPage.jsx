@@ -1,35 +1,43 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useContext } from "react";
 import * as Yup from "yup";
-import { DataContext } from "../context";
+import { DataContext } from "../../context";
 
-export default function Login() {
+export default function Register() {
+    
+      const { postData } = useContext(DataContext);
   // ✅ Validation Schema
-
-  const { postData } = useContext(DataContext);
   const validationSchema = Yup.object({
     email: Yup.string()
       .email("Invalid email format")
       .required("Email is required"),
+
     password: Yup.string()
       .min(6, "Password must be at least 6 characters")
       .required("Password is required"),
+
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref("password"), null], "Passwords must match")
+      .required("Confirm password is required"),
   });
 
-  // ✅ Submit Handler
-  const handleSubmit = async(values, { setSubmitting }) => {
-    console.log("Login Data:", values);
-    const result = await postData('login', values, setSubmitting);
-    console.log(result);
-    setSubmitting(false);
+  const handleSubmit = (values, { setSubmitting, resetForm }) => {
+    // console.log("Register Data:", values);
+
+    postData('register', values, setSubmitting);
   };
 
   return (
-    <div className="h-screen flex items-center justify-center bg-gradient-to-br from-indigo-500 to-purple-600">
-      <div className="bg-white p-8 rounded-xl w-80 shadow-xl">
-        <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
+    <div className="h-screen flex items-center justify-center bg-gradient-to-br from-purple-500 to-indigo-600">
+      <div className="bg-white p-8 rounded-xl w-96 shadow-xl">
+        <h2 className="text-2xl font-bold text-center mb-6">Register</h2>
+
         <Formik
-          initialValues={{ email: "", password: "" }}
+          initialValues={{
+            email: "",
+            password: "",
+            confirmPassword: "",
+          }}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
@@ -61,7 +69,7 @@ export default function Login() {
                 <Field
                   type="password"
                   name="password"
-                  placeholder="••••••••"
+                  placeholder="Enter password"
                   className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
                 />
                 <ErrorMessage
@@ -71,17 +79,37 @@ export default function Login() {
                 />
               </div>
 
-              {/* Button */}
+              {/* Confirm Password */}
+              <div className="mb-4">
+                <label className="block mb-1 text-sm font-medium">
+                  Confirm Password
+                </label>
+                <Field
+                  type="password"
+                  name="confirmPassword"
+                  placeholder="Confirm password"
+                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                />
+                <ErrorMessage
+                  name="confirmPassword"
+                  component="div"
+                  className="text-red-500 text-sm mt-1"
+                />
+              </div>
+
+              {/* Submit Button */}
               <button
                 type="submit"
                 disabled={isSubmitting}
                 className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition duration-200"
               >
-                {isSubmitting ? "Signing In..." : "Sign In"}
+                {isSubmitting ? "Creating Account..." : "Register"}
               </button>
             </Form>
           )}
         </Formik>
+
+        <a href="/login">Login</a>
       </div>
     </div>
   );
