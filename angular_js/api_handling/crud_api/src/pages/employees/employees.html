@@ -1,0 +1,83 @@
+<div class="min-h-screen bg-gray-100 p-10">
+  <div class="max-w-6xl mx-auto bg-white p-8 rounded shadow">
+
+    <h2 class="text-2xl font-bold mb-6 text-center">
+      Employee Management
+    </h2>
+
+    <!-- FORM -->
+    <form [formGroup]="form"
+          (ngSubmit)="submit()"
+          class="grid grid-cols-2 gap-4 mb-8">
+
+      <input formControlName="name"
+             placeholder="Name"
+             class="border p-2 rounded" />
+
+      <input formControlName="email"
+             placeholder="Email"
+             class="border p-2 rounded" />
+
+      <input type="date"
+             formControlName="doj"
+             class="border p-2 rounded" />
+
+      <input type="number"
+             formControlName="age"
+             placeholder="Age"
+             class="border p-2 rounded" />
+
+      <button type="submit"
+              class="col-span-2 py-2 text-white rounded"
+              [ngClass]="editingId() !== null ? 'bg-yellow-500' : 'bg-blue-600'">
+        {{ editingId() !== null ? 'Update Employee' : 'Add Employee' }}
+      </button>
+    </form>
+
+    <!-- LOADING -->
+    @if (loading()) {
+      <div class="flex justify-center items-center py-6">
+        <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
+      </div>
+    } @else {
+
+      <!-- TABLE -->
+      <table class="w-full border text-center">
+        <thead class="bg-gray-200">
+          <tr>
+            <th class="border p-2">ID</th>
+            <th class="border p-2">Name</th>
+            <th class="border p-2">Email</th>
+            <th class="border p-2">DOJ</th>
+            <th class="border p-2">Age</th>
+            <th class="border p-2">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (emp of employees(); track emp.id) {
+            <tr>
+              <td class="border p-2">{{ emp.id }}</td>
+              <td class="border p-2">{{ emp.name }}</td>
+              <td class="border p-2">{{ emp.email }}</td>
+              <td class="border p-2">{{ emp.doj }}</td>
+              <td class="border p-2">{{ emp.age }}</td>
+              <td class="border p-2 space-x-2">
+                <button (click)="edit(emp)"
+                        class="bg-yellow-400 px-3 py-1 text-white rounded">
+                  Edit
+                </button>
+                <button (click)="delete(emp.id!)"
+                        class="bg-red-500 px-3 py-1 text-white rounded">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+
+    }
+
+  </div>
+</div>
