@@ -21,14 +21,28 @@
     <script>
 
         const postData = ()=>{
-            
+            const data = {
+                name : document.getElementById('name').value,
+                email : document.getElementById('email').value,
+            }
+            fetch('http://localhost:3000/user/', {
+                headers : {
+                    'content-type' : "application/json"
+                },
+                method : "POST", 
+                body : JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                location.reload();
+            })    
         }
         fetch('http://localhost:3000/user/')
             .then(response => response.json())
             .then(data => {
                 // console.log(data);
                 data.forEach((e, index)=>{
-                    document.getElementById('root').innerHTML = (`<h1 class='email'>${index+1} - ${e.email} </h1><br>`);
+                    document.getElementById('root').innerHTML += (`<h1 class='email'>${index+1} - ${e.email} </h1><br>`);
                 })
             })
             .catch(error => {
