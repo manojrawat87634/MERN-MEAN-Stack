@@ -21,7 +21,7 @@ export class Profile {
     const formData = new FormData();
     formData.append('file', this.selectedFile);
 
-    this.http.post("http://localhost:8080/api/user-profile", formData)
+    this.http.post("http://localhost:8080/api/profile-pic", formData)
       .subscribe(res => {
         console.log(res);
       });
