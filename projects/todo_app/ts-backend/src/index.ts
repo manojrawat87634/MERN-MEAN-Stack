@@ -19,4 +19,5 @@ const PORT = process.env.PORT || 3000
 app.listen(PORT,()=>{
     conncetionToDataBaseFunction();
     routeFunction(app);
+    console.log(`Server is port ${PORT}`);
 });
